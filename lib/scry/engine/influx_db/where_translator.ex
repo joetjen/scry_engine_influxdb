@@ -47,6 +47,14 @@ defmodule Scry.Engine.InfluxDB.WhereTranslator do
 
   @time_field "time"
 
+  @doc """
+  Translates `wheres` (with `params` resolving any `{:param, name}`
+  placeholder) into a real, bind-parameterized InfluxQL `WHERE` clause
+  -- `{:ok, nil, %{}}` for an empty `wheres`, `{:ok, clause, bind_params}`
+  otherwise, `{:error, {:unsupported, {:construct, _}}}` the moment any
+  predicate falls outside what this module translates. This module's
+  own moduledoc has the complete "what compiles" reasoning.
+  """
   @spec compile([Query.predicate()], map()) ::
           {:ok, String.t() | nil, map()} | {:error, term()}
   def compile([], _params), do: {:ok, nil, %{}}
