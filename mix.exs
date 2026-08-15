@@ -43,21 +43,21 @@ defmodule Scry.Engine.InfluxDB.MixProject do
       # `Scry.Core.EngineBehaviour` and returns `Scry.Core.Query.t()`-
       # shaped data, so it's the real dependency, not test-only. Switch
       # to a `~> x.y` Hex requirement once scry_core is actually
-      # published (impl_spec.md's own dependency-versions convention).
+      # published.
       {:scry_core, path: "../scry_core"},
 
       # === HTTP CLIENT, NOT A DEDICATED DRIVER ===
-      # `instream` (impl_spec.md's own roadmap driver) is confirmed
-      # stale (last Hex release April 2023, no InfluxDB 3.x support)
-      # AND has the identical disqualifying shape `snap` had for
-      # `scry_engine_elasticsearch`: a compile-time `use Instream.
-      # Connection` macro-based module defined in the *consuming*
-      # application, not a value opened at runtime the way this
-      # ecosystem's own `Conn.open/1` convention needs. `req` talks to
-      # InfluxDB 1.8's own classic HTTP API (`/query`, `/write`)
-      # directly instead, the same "no client-specific protocol to
-      # speak" reasoning already used for `scry_engine_elasticsearch`/
-      # `scry_engine_couchdb`/`scry_engine_loki`.
+      # `instream` is confirmed stale (last Hex release April 2023, no
+      # InfluxDB 3.x support) AND has the identical disqualifying shape
+      # `snap` had for `scry_engine_elasticsearch`: a compile-time `use
+      # Instream.Connection` macro-based module defined in the
+      # *consuming* application, not a value opened at runtime the way
+      # this ecosystem's own `Conn.open/1` convention needs. `req`
+      # talks to InfluxDB 1.8's own classic HTTP API (`/query`,
+      # `/write`) directly instead, the same "no client-specific
+      # protocol to speak" reasoning already used for
+      # `scry_engine_elasticsearch`/`scry_engine_couchdb`/
+      # `scry_engine_loki`.
       {:req, "~> 0.5"},
 
       # `req` already pulls `jason` in transitively (its own default

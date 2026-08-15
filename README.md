@@ -19,9 +19,8 @@ the identical "zero time-series-specific code needed" finding
 established three times over already -- so this package's own real
 work is `Scry.Engine.InfluxDB.WhereTranslator`.
 
-Source: <https://github.com/joetjen/scry_engine_influxdb>. Specs live
-in the separate [`scry`](https://github.com/joetjen/scry) repository;
-the behaviour this implements lives in
+Source: <https://github.com/joetjen/scry_engine_influxdb>. The
+behaviour this implements lives in
 [`scry_core`](https://github.com/joetjen/scry_core).
 
 ## Usage
@@ -47,9 +46,9 @@ docker run -d --name scry-influxdb -p 8086:8086 influxdb:1.8
 
 ## No dedicated driver -- confirmed disqualified on two independent grounds
 
-`instream` (impl_spec.md's own roadmap driver) is confirmed stale
-(last Hex release April 2023, no InfluxDB 3.x support) *and* has the
-identical disqualifying shape `snap` had for `scry_engine_elasticsearch`:
+`instream` is confirmed stale (last Hex release April 2023, no
+InfluxDB 3.x support) *and* has the identical disqualifying shape
+`snap` had for `scry_engine_elasticsearch`:
 a compile-time `use Instream.Connection` macro-based module defined in
 the *consuming* application, not a value opened at runtime the way
 this ecosystem's own `Conn.open/1` convention needs. `req` talks to
